@@ -3,8 +3,17 @@ const asyncHandler = require('express-async-handler');
 const ApiError = require('../utils/apiError');
 
 exports.createNote = asyncHandler(async (req, res, next) => {
-    const note = await Note.create({ title: req.body.title, content: req.body.content, user: req.user._id }).select('-__v -user');
-    res.status(201).json({ data: note });
+   
+    const note = await Note.create({
+        title: req.body.title,
+        content: req.body.content,
+        user: req.user._id
+    });
+
+   
+    const selectedNote = await Note.findById(note._id).select('-__v -user');
+    
+    res.status(201).json({ data: selectedNote });
 });
 
 exports.getAllNotes = asyncHandler(async (req, res, next) => {
