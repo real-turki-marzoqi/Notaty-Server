@@ -27,11 +27,13 @@ exports.signUpValidator = [
 
     check('passwordConfirm')
         .notEmpty().withMessage("Password confirm is required")
-        .trim(),
+        .trim()
+        .isLength({ min: 3 }).withMessage('password  must be at least 6 characters'),
 
     check("password")
         .notEmpty().withMessage("Password is required")
         .trim()
+        .isLength({ min: 3 }).withMessage('password  must be at least 6 characters')
         .custom((val, { req }) => {
             if (val !== req.body.passwordConfirm) {
                 throw new Error("Passwords do not match");
