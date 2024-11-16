@@ -4,7 +4,6 @@ const {
   logInValidator,
   updateLoggedUserDataValidator,
   updateLoggedUserPasswordValidator,
-  forgotPasswordValidator,
   resetCodeValidator,
   resetNewPasswordValidator
 } = require("../utils/Validators/authValidators");
@@ -36,7 +35,7 @@ router
   .route("/updatemypassword")
   .put(protect, updateLoggedUserPasswordValidator, updateLoggedUserPassword);
 
-router.route("/forgotpassword").post(forgotPasswordValidator, forgotPassword);
+router.route("/forgotpassword").post(forgotPassword);
 
 router.route('/verifyresetcode').post(resetCodeValidator,verifyResetCode)
 
